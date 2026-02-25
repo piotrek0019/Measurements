@@ -12,19 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 // license.SetNonCommercialPersonal("Piotr Augustyniak");
 
 
-// builder.Services.AddCors(options =>
-// {
-//    options.AddPolicy("AllowClient",
-//        policy => policy
-//            .WithOrigins("http://localhost:5173") // Vite default
-//            .AllowAnyHeader()
-//            .AllowAnyMethod());
-// });
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("AllowClient",
+         policy => policy
+             .WithOrigins("http://localhost:5173") // Vite default
+             .AllowAnyHeader()
+             .AllowAnyMethod());
 });
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//});
 
 builder.Services.AddScoped<MeasurementExcelReader>();
 
@@ -47,8 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-//app.UseCors("AllowClient");
-app.UseCors("AllowAll");
+app.UseCors("AllowClient");
+//app.UseCors("AllowAll");
 
 app.MapControllers();
 

@@ -1,0 +1,16 @@
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+
+

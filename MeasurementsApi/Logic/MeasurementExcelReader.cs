@@ -81,9 +81,13 @@
         /// <param name="columnAddress">The address of the column to get data/set of numbers from</param>
         /// <param name="operationType">The type of colculation to preform</param>
         /// <returns>Calculated result</returns>
-        public double GetCalculation(string columnAddress, RequestSimpleCalculations.SimpleOperationTypes operationType)
+        public string GetCalculation(string columnAddress, RequestSimpleCalculations.SimpleOperationTypes operationType)
         {
-            return CalculationHelpers.GetCalculation(WorkSheet, columnAddress, operationType);
+            if (CalculationHelpers.TryGetCalculation(WorkSheet, columnAddress, operationType, out var calculatedResult))
+            {
+                return calculatedResult.ToString();
+            }
+            return $"Could not calculate {operationType}";
         }
     }
 }
