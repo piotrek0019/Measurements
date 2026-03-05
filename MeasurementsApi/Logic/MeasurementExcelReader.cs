@@ -45,10 +45,17 @@
         {
             foreach (var row in WorkSheet.RowsUsed())
             {
-                var rowToReturn = new List<string>();
+                var rowToReturn = new List<Cell>();
                 foreach (var cell in row.Cells())
                 {
-                    rowToReturn.Add(cell.GetFormattedString());
+                    var cellColumnName = cell.WorksheetColumn()?.ColumnLetter();
+                    var cellValue = cell.GetFormattedString();
+                    if (cellColumnName == null)
+                    {
+                        continue;
+                    }
+                    var cellToUse = new Cell(cellColumnName, cellValue);
+                    rowToReturn.Add(cellToUse);
                 }
 
                 var measurementDto = new MeasurementDto();
