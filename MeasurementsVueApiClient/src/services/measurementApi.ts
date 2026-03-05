@@ -16,3 +16,19 @@ export async function getMeasurements() {
   const { data } = await api.get("/measurements/allData");
   return data;
 }
+
+/* export interface OperationRequest {
+  operationType: "Average" | "Sum" | "Min" | "Max"; // adjust to your API
+  columnAddress: string;
+} */
+
+
+export async function runOperation(operationType : string, columnAddress : string) {
+  const { data } = await api.post("/measurements/operations", {
+    operationType,
+    columnAddress
+  });
+
+  return data;
+}
+

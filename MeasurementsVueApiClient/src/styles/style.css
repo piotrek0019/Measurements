@@ -10,6 +10,17 @@ body {
   text-align: center;
 }
 
+.Museo-700, .Museo-700 a { 
+	font-family: Museo-700;
+	font-weight: normal;
+	font-style: normal;
+  color: rgb(140, 140, 126);
+}
+
+.logo, .logo a{
+  font-size: 36px;
+}
+
 
 
 
