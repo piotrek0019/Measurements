@@ -2,7 +2,7 @@
 using CopilotApi.Models;
 using MathNet.Numerics.Statistics;
 
-namespace CopilotApi.Logic
+namespace DataMeasurementsApi.Helpers
 {
     /// <summary>
     /// Class with methods calculation helpers 
@@ -18,8 +18,8 @@ namespace CopilotApi.Logic
         /// <param name="calculationResult">The result of the calculation to out</param>
         /// <returns>Whether the type of the calculation can be preformed by this method</returns>
         public static bool TryGetCalculation(
-            IXLWorksheet workSheet, 
-            string calculateFromColumn, 
+            IXLWorksheet workSheet,
+            string calculateFromColumn,
             RequestSimpleCalculations.SimpleOperationTypes operationType,
             out double calculationResult)
         {

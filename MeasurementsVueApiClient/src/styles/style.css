@@ -1,13 +1,13 @@
 body {
   min-width: 320px;
   min-height: 100vh;
+  
 }
 
 #app {
   
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 .Museo-700, .Museo-700 a { 
@@ -20,6 +20,14 @@ body {
 .logo, .logo a{
   font-size: 36px;
 }
+
+.header-bar {
+  display: flex;
+  align-items: center;     /* vertically center */
+  justify-content: space-between; /* push logo left, menu right */
+  padding: 1rem 0;
+}
+
 
 
 

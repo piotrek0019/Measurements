@@ -2,6 +2,7 @@
 {
     using ClosedXML.Excel;
     using CopilotApi.Models;
+    using DataMeasurementsApi.Helpers;
     using System.Collections.Generic;
 
 

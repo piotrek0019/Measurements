@@ -40,6 +40,19 @@ namespace CopilotApi.Controllers
         }
 
         /// <summary>
+        /// Endpoint to retrieve all supported simple operation types for calculations.
+        /// Returns an array of <see cref="RequestSimpleCalculations.SimpleOperationTypes"/> values.
+        /// </summary>
+        /// <returns>An array of supported operation types.</returns>
+        [HttpGet("operationTypes")]
+        public ActionResult<RequestSimpleCalculations.SimpleOperationTypes[]> GetSimpleOperationTypes()
+        {
+            var operationTypes = Enum.GetValues(typeof(RequestSimpleCalculations.SimpleOperationTypes));
+                
+            return Ok(operationTypes);
+        }
+
+        /// <summary>
         /// Endpoint to retrieve data from a specific column in the excel sheet. The column name is provided as a query parameter.
         /// </summary>
         /// <param name="columnAddress"></param>
