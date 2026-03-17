@@ -6,16 +6,29 @@ const raw = ref(null);
 const operations = ref(null);
 const showCalculation = ref(false);
 
+/**
+ * The props object defines the properties that the Measurements component expects to receive from its parent component. 
+ * In this case, it expects a single prop called operationSelected, which is of type String. 
+ * This prop will be used to determine which operation type to run when the user clicks on a column header in the measurements table.
+ */
+const props = defineProps({
+  operationSelected: String
+})
+
+/**
+ * Lifecycle hook that is called when the component is mounted.
+ */
 onMounted(async () => {
   raw.value = await getMeasurements();
   console.log("RAW DATA:", raw);
 });
 
-/* onMounted(async () => {
-  operations.value = await runOperation("Average", "F"); 
-  console.log("OPERATIONS DATA:", operations);
-}); */
 
+/**
+ * Runs a specific operation on the measurements data.
+ * @param operationType The type of operation to run (e.g., "Average", "Sum", etc.).
+ * @param column The address of the column on which to run the operation.
+ */
 async function runOperationType(operationType: string, column: string) {
   operations.value = await runOperation(operationType, column); 
   showCalculation.value = true;
@@ -35,7 +48,7 @@ async function runOperationType(operationType: string, column: string) {
         <th v-for="cellHeader in row.cells" 
             v-if="rowIndex === 0" 
             :key="cellHeader.cellColumn">
-            <button @click="runOperationType('Average', cellHeader.cellColumn)" class="button is-text">
+            <button @click="runOperationType(operationSelected, cellHeader.cellColumn)" class="button is-text">
               {{ cellHeader.cellValue }}
             </button>
         </th>
