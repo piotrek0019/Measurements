@@ -23,12 +23,22 @@ namespace DataMeasurementsApi.Helpers
             RequestSimpleCalculations.SimpleOperationTypes operationType,
             out double calculationResult)
         {
+            // TODO this could be user or dynamic selection
+            const int HeaderRow = 1;
+
             var numbersToCalculate =
                 workSheet
                 .Column(calculateFromColumn)
                 .CellsUsed()
-                .Skip(1) // Skip header
+                .Skip(HeaderRow) // Skip header
                 .Select(c => c.GetDouble());
+
+            var dataFromColumn = workSheet.Column(calculateFromColumn).CellsUsed();
+
+            foreach(var cell in dataFromColumn)
+            {
+                //cell
+            }
 
             switch (operationType)
             {

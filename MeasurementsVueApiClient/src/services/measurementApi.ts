@@ -23,13 +23,13 @@ export async function getOperationTypes() {
 }
 /**
  * Runs a specific operation on the measurements data.
- * @param operationType The type of operation to run (e.g., "Average", "Sum", etc.).
+ * @param simpleOperationType The type of operation to run (e.g., "Average", "Sum", etc.).
  * @param columnAddress The address of the column on which to run the operation.
  * @returns A promise that resolves to the result of the operation.
  */
-export async function runOperation(operationType : string, columnAddress : string) {
+export async function runOperation(simpleOperationType : string, columnAddress : string) {
   const { data } = await api.post("/measurements/operations", {
-    operationType,
+    simpleOperationType,
     columnAddress
   });
 

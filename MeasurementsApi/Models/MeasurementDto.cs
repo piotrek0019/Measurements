@@ -30,11 +30,45 @@
         /// <summary>
         /// The column name that the cell belongs to, stored as a string.
         /// </summary>
-        public string CellColumn { get; set; }
+        public string CellColumn { get; private set; }
 
         /// <summary>
         /// The value of the cell, stored as a string. 
         /// </summary>
-        public string CellValue { get; set; }
+        public string CellValue { get; private set; }
+    }
+
+    /// <summary>
+    /// Represents the result of a calculation operation performed on measurement data,
+    /// including the operation type, a descriptive message, and the calculated result.
+    /// </summary>
+    public class OperationResultInfo
+    {
+        /// <summary>
+        /// Operation type to preform
+        /// </summary>
+        public string Operation { get; private set; }
+
+        /// <summary>
+        /// Extra info
+        /// </summary>
+        public string Message { get; private set; }
+
+        /// <summary>
+        /// Calculated value
+        /// </summary>
+        public string Calculated { get; private set; }
+
+        /// <summary>
+        /// A constructor for <see cref="OperationResultInfo"/>
+        /// </summary>
+        /// <param name="operation">Operation type</param>
+        /// <param name="calculated">Calculated value</param>
+        public OperationResultInfo(RequestSimpleCalculations operation, string calculated)
+        {
+            Operation = operation.SimpleOperationType.ToString();
+            Message = $"You selected {operation.SimpleOperationType}";
+            Calculated = calculated;
+        }
     }
 }
