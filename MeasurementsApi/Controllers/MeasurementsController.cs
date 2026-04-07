@@ -45,11 +45,20 @@ namespace CopilotApi.Controllers
         /// </summary>
         /// <returns>An array of supported operation types.</returns>
         [HttpGet("operationTypes")]
-        public ActionResult<RequestSimpleCalculations.SimpleOperationTypes[]> GetSimpleOperationTypes()
+        public ActionResult<IEnumerable<SimpleOperationTypeDto>> GetSimpleOperationTypes()
         {
             var operationTypes = Enum.GetValues(typeof(RequestSimpleCalculations.SimpleOperationTypes));
+
+            var simpleOperationTypesToList = new List<SimpleOperationTypeDto>();
+            foreach(var operationType in operationTypes)
+            {
+                if(operationType is RequestSimpleCalculations.SimpleOperationTypes simpleOperationType)
+                {
+                    simpleOperationTypesToList.Add(new SimpleOperationTypeDto(simpleOperationType));
+                }
+            }
                 
-            return Ok(operationTypes);
+            return Ok(simpleOperationTypesToList);
         }
 
         /// <summary>
@@ -71,17 +80,11 @@ namespace CopilotApi.Controllers
         /// <param name="operation">The type of colculation to preform</param>
         /// <returns>The type and result of selected calculation</returns>
         [HttpPost("operations")]
-        public IActionResult Calculate(RequestSimpleCalculations operation)
+        public ActionResult<OperationResultInfo>  Calculate(RequestSimpleCalculations operation)
         {
-            return Ok(new
-            {
-                // This could an object of some specified class instead of this anonymous object
-                Operation = operation.OperationType.ToString(),
-                Message = $"You selected {operation.OperationType}",
-                Calculated = _reader.GetCalculation(operation.ColumnAddress, operation.OperationType)
-            });
+            var result = _reader.GetCalculation(operation.ColumnAddress, operation.SimpleOperationType);
+            var resultInfo = new OperationResultInfo(operation, result);
+            return Ok(resultInfo);
         }
-
     }
-
 }
